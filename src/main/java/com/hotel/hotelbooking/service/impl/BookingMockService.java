@@ -1,25 +1,24 @@
-package com.hotel.hotelbooking.service.mock;
+package com.hotel.hotelbooking.service.impl;
 
-import com.hotel.hotelbooking.model.Booking;
-import com.hotel.hotelbooking.model.Room;
+import com.hotel.hotelbooking.model.BookingDTO;
+import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Service
+//@Service
 public class BookingMockService implements BookingService {
+
     @Override
-    public List<Room> getAvailableRooms() {
+    public List<RoomDTO> getAvailableRooms(LocalDateTime start_date, LocalDateTime end_date) {
         return roomExamples();
     }
 
     @Override
-    public Booking createBooking(Booking booking) {
-        return Booking.builder()
-                .id(1)
+    public BookingDTO createBooking(BookingDTO booking) {
+        return BookingDTO.builder()
                 .roomId(1)
                 .checkInDate(LocalDateTime.of(2020, 10, 9, 8, 7))
                 .checkOutDate(LocalDateTime.of(2020, 11, 9, 8, 7))
@@ -30,9 +29,8 @@ public class BookingMockService implements BookingService {
                 .build();
     }
 
-    private List<Room> roomExamples() {
-        Room room1 = Room.builder()
-                .id(1)
+    private List<RoomDTO> roomExamples() {
+        RoomDTO room1 = RoomDTO.builder()
                 .roomNumber("101")
                 .roomType("Suite")
                 .maxOccupancy(4)
@@ -41,8 +39,7 @@ public class BookingMockService implements BookingService {
                 .description("Big room")
                 .build();
 
-        Room room2 = Room.builder()
-                .id(2)
+        RoomDTO room2 = RoomDTO.builder()
                 .roomNumber("102")
                 .roomType("Medium")
                 .maxOccupancy(3)
@@ -51,8 +48,7 @@ public class BookingMockService implements BookingService {
                 .description("Medium room")
                 .build();
 
-        Room room3 = Room.builder()
-                .id(3)
+        RoomDTO room3 = RoomDTO.builder()
                 .roomNumber("103")
                 .roomType("Normal")
                 .maxOccupancy(2)
