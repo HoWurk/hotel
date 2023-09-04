@@ -1,6 +1,7 @@
 package com.hotel.hotelbooking.controller;
 
 import com.hotel.hotelbooking.model.BookingDTO;
+import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,9 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    @GetMapping("/available")
-    public ResponseEntity<List<RoomDTO>> getAvailableRooms(@RequestBody Map<String, LocalDateTime> dates) {
-        LocalDateTime start_date = dates.get("start_date");
-        LocalDateTime end_date = dates.get("end_date");
-        List<RoomDTO> rooms = bookingService.getAvailableRooms(start_date, end_date);
+    @PostMapping("/available")
+    public ResponseEntity<List<RoomDTO>> getAvailableRooms(@RequestBody DateTimeSpan span) {
+        List<RoomDTO> rooms = bookingService.getAvailableRooms(span);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 

@@ -3,6 +3,7 @@ package com.hotel.hotelbooking.service.impl;
 import com.hotel.hotelbooking.converter.Mapper;
 import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.model.BookingDTO;
+import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.repository.BookingRepository;
 import com.hotel.hotelbooking.repository.RoomRepository;
@@ -25,7 +26,9 @@ public class BookingServiceImpl implements BookingService {
     private final Mapper mapper;
 
     @Override
-    public List<RoomDTO> getAvailableRooms(LocalDateTime start_date, LocalDateTime end_date) {
+    public List<RoomDTO> getAvailableRooms(DateTimeSpan span) {
+        LocalDateTime start_date = span.getStart_date();
+        LocalDateTime end_date = span.getEnd_date();
         List<Booking> overlappingBookings = bookingRepository.findOverlappingBookings(start_date, end_date);
 
         List<Integer> occupiedRoomIds = overlappingBookings.stream()

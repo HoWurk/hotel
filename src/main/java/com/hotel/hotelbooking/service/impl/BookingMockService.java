@@ -1,6 +1,7 @@
 package com.hotel.hotelbooking.service.impl;
 
 import com.hotel.hotelbooking.model.BookingDTO;
+import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class BookingMockService implements BookingService {
 
     @Override
-    public List<RoomDTO> getAvailableRooms(LocalDateTime start_date, LocalDateTime end_date) {
+    public List<RoomDTO> getAvailableRooms(DateTimeSpan span) {
         return roomExamples();
     }
 
