@@ -1,7 +1,7 @@
 package com.hotel.hotelbooking.service.impl;
 
+import com.hotel.hotelbooking.model.AvailableRoomRequest;
 import com.hotel.hotelbooking.model.BookingDTO;
-import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class BookingMockService implements BookingService {
 
     @Override
-    public List<RoomDTO> getAvailableRooms(DateTimeSpan span) {
+    public List<RoomDTO> getAvailableRooms(AvailableRoomRequest request) {
         return roomExamples();
     }
 

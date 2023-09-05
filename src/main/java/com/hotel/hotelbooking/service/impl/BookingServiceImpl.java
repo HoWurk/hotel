@@ -1,6 +1,7 @@
 package com.hotel.hotelbooking.service.impl;
 
 import com.hotel.hotelbooking.converter.Mapper;
+import com.hotel.hotelbooking.model.AvailableRoomRequest;
 import com.hotel.hotelbooking.model.BookingDTO;
 import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
@@ -20,7 +21,8 @@ public class BookingServiceImpl implements BookingService {
     private final Mapper mapper;
 
     @Override
-    public List<RoomDTO> getAvailableRooms(DateTimeSpan span) {
+    public List<RoomDTO> getAvailableRooms(AvailableRoomRequest request) {
+        DateTimeSpan span = request.getDateTimeSpan();
         return bookingRepository.findOverlappingBookings(span.getStartDate(), span.getEndDate()).stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());

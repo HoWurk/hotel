@@ -3,7 +3,6 @@ package com.hotel.hotelbooking.repository;
 
 import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.entity.Room;
-import com.hotel.hotelbooking.model.RoomDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

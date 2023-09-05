@@ -1,8 +1,7 @@
 package com.hotel.hotelbooking.controller;
 
+import com.hotel.hotelbooking.model.AvailableRoomRequest;
 import com.hotel.hotelbooking.model.BookingDTO;
-import com.hotel.hotelbooking.model.DateTimeRequest;
-import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +23,8 @@ public class BookingController {
     private final BookingService bookingMockService;
 
     @PostMapping("/available")
-    public ResponseEntity<List<RoomDTO>> getAvailableRooms(@RequestBody DateTimeRequest request) {
-        DateTimeSpan dateTimeSpan = request.getDateTimeSpan();
-        List<RoomDTO> rooms = bookingServiceImpl.getAvailableRooms(dateTimeSpan);
+    public ResponseEntity<List<RoomDTO>> getAvailableRooms(@RequestBody AvailableRoomRequest request) {
+        List<RoomDTO> rooms = bookingServiceImpl.getAvailableRooms(request);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
