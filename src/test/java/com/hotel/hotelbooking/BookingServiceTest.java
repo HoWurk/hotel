@@ -14,12 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,9 +25,6 @@ public class BookingServiceTest {
 
     @Mock
     private BookingRepository bookingRepository;
-
-    @Mock
-    private RoomRepository roomRepository;
 
     @Mock
     private Mapper mapper;
@@ -42,67 +37,21 @@ public class BookingServiceTest {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 9, 0, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 11, 0, 0);
         DateTimeSpan span = DateTimeSpan.builder()
-                .start_date(startDate)
-                .end_date(endDate)
+                .startDate(startDate)
+                .endDate(endDate)
                 .build();
-        List<Room> allRooms = getRoomsExample();
-        List<Booking> overlappingBookings = getBookingsExample(allRooms);
-
+        List<Room> allRooms = TestUtils.getRoomsExample();
+        List<RoomDTO> roomDTOS = allRooms.stream().map(mapper::toDto).toList();
         when(bookingRepository.findOverlappingBookings(startDate, endDate))
-                .thenReturn(overlappingBookings);
-        when(roomRepository.findAll()).thenReturn(allRooms);
-        when(mapper.toDto(any(Room.class))).thenAnswer(invocation -> {
-            Room room = invocation.getArgument(0);
-            return RoomDTO.builder()
-                    .roomNumber(room.getRoomNumber())
-                    .roomType(room.getRoomType())
-                    .maxOccupancy(room.getMaxOccupancy())
-                    .active(room.getActive())
-                    .description(room.getDescription())
-                    .build();
-        });
+                .thenReturn(allRooms);
 
         List<RoomDTO> availableRooms = bookingService.getAvailableRooms(span);
 
-        RoomDTO correctRoom1 = mapper.toDto(allRooms.get(0));
-        RoomDTO correctRoom2 = mapper.toDto(allRooms.get(2));
         assertNotNull(availableRooms);
-        assertEquals(2, availableRooms.size());
-        assertTrue(availableRooms.contains(correctRoom1));
-        assertTrue(availableRooms.contains(correctRoom2));
-
+        assertEquals(3, availableRooms.size());
+        assertTrue(availableRooms.containsAll(roomDTOS));
     }
 
-    private List<Room> getRoomsExample() {
-        Room room1 = Room.builder()
-                .id(1)
-                .roomNumber("101")
-                .roomType("Suite")
-                .maxOccupancy(4)
-                .ratePerDay(BigDecimal.valueOf(1000.00))
-                .active(true)
-                .description("Big room")
-                .build();
-        Room room2 = Room.builder()
-                .id(2)
-                .roomNumber("102")
-                .roomType("Suite")
-                .maxOccupancy(4)
-                .ratePerDay(BigDecimal.valueOf(1000.00))
-                .active(true)
-                .description("Big room")
-                .build();
-        Room room3 = Room.builder()
-                .id(3)
-                .roomNumber("201")
-                .roomType("Suite")
-                .maxOccupancy(4)
-                .ratePerDay(BigDecimal.valueOf(1000.00))
-                .active(true)
-                .description("Big room")
-                .build();
-        return List.of(room1, room2, room3);
-    }
 
     private List<Booking> getBookingsExample(List<Room> rooms) {
         Booking booking1 = Booking.builder()

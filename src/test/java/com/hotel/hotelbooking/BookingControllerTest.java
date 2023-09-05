@@ -1,6 +1,7 @@
 package com.hotel.hotelbooking;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hotel.hotelbooking.model.DateTimeRequest;
 import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
@@ -30,8 +31,10 @@ public class BookingControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    /*@MockBean
+    private BookingService bookingMockService;*/
     @MockBean
-    private BookingService bookingService;
+    private BookingService bookingServiceImpl;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -39,12 +42,15 @@ public class BookingControllerTest {
     @Test
     public void givenBookings_whenGetRooms_thenStatus200() throws Exception {
         DateTimeSpan span = DateTimeSpan.builder()
-                .start_date(LocalDateTime.parse("2023-09-09T00:00:00"))
-                .end_date(LocalDateTime.parse("2023-09-11T00:00:00"))
+                .startDate(LocalDateTime.parse("2023-09-09T00:00:00"))
+                .endDate(LocalDateTime.parse("2023-09-11T00:00:00"))
                 .build();
-        String spanJson = objectMapper.writeValueAsString(span);
-        when(bookingService.getAvailableRooms(span))
-                .thenReturn(getRoomsExample());
+        DateTimeRequest dateTimeRequest = DateTimeRequest.builder()
+                .dateTimeSpan(span)
+                .build();
+        String spanJson = objectMapper.writeValueAsString(dateTimeRequest);
+        when(bookingServiceImpl.getAvailableRooms(span))
+                .thenReturn(getRoomsDTOExample());
 
         mvc.perform(post("/bookings/available")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -54,10 +60,10 @@ public class BookingControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(3)));
-        verify(bookingService, times(1)).getAvailableRooms(any());
+        verify(bookingServiceImpl, times(1)).getAvailableRooms(any());
     }
 
-    private List<RoomDTO> getRoomsExample() {
+    private List<RoomDTO> getRoomsDTOExample() {
         RoomDTO room1 = RoomDTO.builder()
                 .roomNumber("101")
                 .roomType("Suite")
