@@ -1,8 +1,8 @@
 package com.hotel.hotelbooking;
 
 import com.hotel.hotelbooking.converter.Mapper;
-import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.entity.Room;
+import com.hotel.hotelbooking.model.AvailableRoomRequest;
 import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.repository.BookingRepository;
@@ -39,12 +39,15 @@ public class BookingServiceTest {
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
+        AvailableRoomRequest request = AvailableRoomRequest.builder()
+                .dateTimeSpan(span)
+                .build();
         List<Room> allRooms = TestUtils.getRoomsExample();
         List<RoomDTO> roomDTOS = allRooms.stream().map(mapper::toDto).toList();
         when(bookingRepository.findOverlappingBookings(startDate, endDate))
                 .thenReturn(allRooms);
 
-        List<RoomDTO> availableRooms = bookingService.getAvailableRooms(span);
+        List<RoomDTO> availableRooms = bookingService.getAvailableRooms(request);
 
         assertNotNull(availableRooms);
         assertEquals(3, availableRooms.size());

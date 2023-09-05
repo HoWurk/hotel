@@ -4,7 +4,6 @@ import com.hotel.hotelbooking.entity.Booking;
 import com.hotel.hotelbooking.entity.Room;
 import com.hotel.hotelbooking.repository.BookingRepository;
 import com.hotel.hotelbooking.repository.RoomRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class BookingRepositoryTest {
     }
 
     @Test
-    public void whenFindOverlappingBookings_thenReturnRooms() {
+    public void findOverlappingBookings_thenReturnRoom() {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 9, 15, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 11, 15, 0);
 
@@ -48,7 +47,7 @@ public class BookingRepositoryTest {
     }
 
     @Test
-    public void whenFindOverlappingBookings_andBigSpan_thenReturnEmpty() {
+    public void findOverlappingBookings_andBigSpan_thenReturnEmpty() {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 9, 15, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 16, 15, 0);
 
@@ -59,13 +58,13 @@ public class BookingRepositoryTest {
     }
 
     @Test
-    public void whenFindOverlappingBookings_andSameDate_thenReturnMany() {
+    public void findOverlappingBookings_andSameDate_thenReturnMany() {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 16, 15, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 16, 15, 0);
 
         List<Room> overlappingBookings = bookingRepository.findOverlappingBookings(startDate, endDate);
 
         assertNotNull(overlappingBookings);
-        assertTrue(overlappingBookings.size() > 1);
+        assertEquals(overlappingBookings.size(), 3);
     }
 }
