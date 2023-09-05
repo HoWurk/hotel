@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotel.hotelbooking.model.DateTimeRequest;
 import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
-import com.hotel.hotelbooking.service.BookingService;
+import com.hotel.hotelbooking.service.impl.BookingMockService;
+import com.hotel.hotelbooking.service.impl.BookingServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,10 +32,10 @@ public class BookingControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    /*@MockBean
-    private BookingService bookingMockService;*/
     @MockBean
-    private BookingService bookingServiceImpl;
+    private BookingMockService bookingMockService;
+    @MockBean
+    private BookingServiceImpl bookingServiceImpl;
 
     @Autowired
     private ObjectMapper objectMapper;

@@ -9,7 +9,6 @@ import com.hotel.hotelbooking.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +21,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<RoomDTO> getAvailableRooms(DateTimeSpan span) {
-        LocalDateTime startDate = span.getStartDate();
-        LocalDateTime endDate = span.getEndDate();
-
-        return bookingRepository.findOverlappingBookings(startDate, endDate).stream()
+        return bookingRepository.findOverlappingBookings(span.getStartDate(), span.getEndDate()).stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
     }

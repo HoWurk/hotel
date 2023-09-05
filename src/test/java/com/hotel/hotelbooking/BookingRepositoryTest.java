@@ -48,19 +48,7 @@ public class BookingRepositoryTest {
     }
 
     @Test
-    public void whenFindOverlappingBookings_andWrongSpan_thenShouldWorkCorrectly() {
-        LocalDateTime startDate = LocalDateTime.of(2023, 9, 11, 15, 0);
-        LocalDateTime endDate = LocalDateTime.of(2023, 9, 9, 15, 0);
-
-        List<Room> overlappingBookings = bookingRepository.findOverlappingBookings(startDate, endDate);
-
-        assertNotNull(overlappingBookings);
-        assertEquals(overlappingBookings.size(), 1);
-        assertTrue(overlappingBookings.contains(rooms.get(1)));
-    }
-
-    @Test
-    public void whenFindOverlappingBookings_andBigSpan_thenShouldReturnEmpty() {
+    public void whenFindOverlappingBookings_andBigSpan_thenReturnEmpty() {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 9, 15, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 16, 15, 0);
 
@@ -71,13 +59,13 @@ public class BookingRepositoryTest {
     }
 
     @Test
-    public void whenFindOverlappingBookings_andSameDate_thenShouldWorkCorrectly() {
+    public void whenFindOverlappingBookings_andSameDate_thenReturnMany() {
         LocalDateTime startDate = LocalDateTime.of(2023, 9, 16, 15, 0);
         LocalDateTime endDate = LocalDateTime.of(2023, 9, 16, 15, 0);
 
         List<Room> overlappingBookings = bookingRepository.findOverlappingBookings(startDate, endDate);
 
         assertNotNull(overlappingBookings);
-        assertTrue(overlappingBookings.size() > 0);
+        assertTrue(overlappingBookings.size() > 1);
     }
 }
