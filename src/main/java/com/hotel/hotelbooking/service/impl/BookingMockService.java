@@ -4,12 +4,13 @@ import com.hotel.hotelbooking.model.BookingDTO;
 import com.hotel.hotelbooking.model.DateTimeSpan;
 import com.hotel.hotelbooking.model.RoomDTO;
 import com.hotel.hotelbooking.service.BookingService;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//@Service
+@Service
 public class BookingMockService implements BookingService {
 
     @Override
