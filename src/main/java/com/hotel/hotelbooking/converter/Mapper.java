@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Mapper {
+
     public RoomDTO toDto(Room room) {
         return RoomDTO.builder()
                 .roomNumber(room.getRoomNumber())

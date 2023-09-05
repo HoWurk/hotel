@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class DateTimeSpan {
 
-    private LocalDateTime start_date;
+    private LocalDateTime startDate;
 
-    private LocalDateTime end_date;
+    private LocalDateTime endDate;
 }
