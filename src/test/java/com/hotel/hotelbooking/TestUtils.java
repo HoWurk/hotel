@@ -5,7 +5,6 @@ import com.hotel.hotelbooking.entity.Room;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestUtils {
@@ -24,6 +23,7 @@ public class TestUtils {
                 .active(true)
                 .description("Big room")
                 .build();
+
         Room room2 = Room.builder()
                 .id(2)
                 .roomNumber("102")
@@ -33,6 +33,7 @@ public class TestUtils {
                 .active(true)
                 .description("Big room")
                 .build();
+
         Room room3 = Room.builder()
                 .id(3)
                 .roomNumber("201")
@@ -42,6 +43,7 @@ public class TestUtils {
                 .active(true)
                 .description("Big room")
                 .build();
+
         return List.of(room1, room2, room3);
     }
 
@@ -60,6 +62,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 25, 11, 45))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 30, 9, 30))
                 .build();
+
         Booking booking2 = Booking.builder()
                 .id(2)
                 .room(room)
@@ -70,6 +73,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 28, 15, 30))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 31, 10, 15))
                 .build();
+
         Booking booking3 = Booking.builder()
                 .id(3)
                 .room(room)
@@ -80,6 +84,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 27, 9, 0))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 29, 17, 45))
                 .build();
+
         return List.of(booking1, booking2, booking3);
     }
 
@@ -94,6 +99,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 25, 11, 45))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 30, 9, 30))
                 .build();
+
         Booking booking2 = Booking.builder()
                 .id(2)
                 .room(rooms.get(1))
@@ -104,6 +110,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 28, 15, 30))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 31, 10, 15))
                 .build();
+
         Booking booking3 = Booking.builder()
                 .id(3)
                 .room(rooms.get(2))
@@ -114,6 +121,7 @@ public class TestUtils {
                 .creationTimestamp(LocalDateTime.of(2023, 8, 27, 9, 0))
                 .lastUpdateTimestamp(LocalDateTime.of(2023, 8, 29, 17, 45))
                 .build();
+
         return List.of(booking1, booking2, booking3);
     }
 

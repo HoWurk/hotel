@@ -1,4 +1,4 @@
-INSERT INTO Room (room_number, room_type, max_occupancy, rate_per_day, active, description)
+INSERT INTO rooms (room_number, room_type, max_occupancy, rate_per_day, active, description)
 VALUES ('101', 'Suite', 4, 1000.00, true, 'Spacious suite with a view'),
        ('102', 'Standard', 2, 500.00, true, 'Cozy standard room'),
        ('103', 'Deluxe', 3, 800.00, true, 'Luxurious deluxe room'),
@@ -10,7 +10,7 @@ VALUES ('101', 'Suite', 4, 1000.00, true, 'Spacious suite with a view'),
        ('109', 'Deluxe', 3, 800.00, true, 'Charming deluxe room'),
        ('110', 'Suite', 4, 1000.00, true, 'Luxury suite with a spa bath');
 
-INSERT INTO Booking (room_id, check_in_date, check_out_date, guests_amount, guests_info, creation_timestamp,
+INSERT INTO bookings (room_id, check_in_date, check_out_date, guests_amount, guests_info, creation_timestamp,
                      last_update_timestamp)
 VALUES (1, '2023-09-10 14:00:00', '2023-09-15 10:00:00', 2, 'Couple', '2023-08-25 11:45:00', '2023-08-30 09:30:00'),
        (2, '2023-09-12 12:00:00', '2023-09-14 12:00:00', 1, 'Solo traveler', '2023-08-28 15:30:00',

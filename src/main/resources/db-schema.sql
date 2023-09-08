@@ -1,4 +1,4 @@
-CREATE TABLE room (
+CREATE TABLE IF NOT EXISTS rooms (
                       id INT AUTO_INCREMENT PRIMARY KEY,
                       room_number VARCHAR(10),
                       room_type VARCHAR(20),
@@ -8,7 +8,7 @@ CREATE TABLE room (
                       description VARCHAR(255)
 );
 
-CREATE TABLE booking (
+CREATE TABLE IF NOT EXISTS bookings (
                          id INT AUTO_INCREMENT PRIMARY KEY,
                          room_id INT,
                          check_in_date TIMESTAMP,
